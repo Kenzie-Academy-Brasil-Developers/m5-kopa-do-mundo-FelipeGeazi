@@ -38,7 +38,7 @@ class TeamDetails(APIView):
         try: 
             team = Team.objects.get(id = team_id)
         except Team.DoesNotExist:
-            return Response({"msg": "Team not found"}) 
+            return Response({"message": "Team not found"}, status.HTTP_404_NOT_FOUND)
         
         for key, value in request.data.items():
             setattr(team, key, value)
@@ -54,7 +54,7 @@ class TeamDetails(APIView):
             team = Team.objects.get(id= team_id)
 
         except Team.DoesNotExist :
-            return Response({"msg" : "Team not found"}, status.HTTP_404_NOT_FOUND)
+            return Response({"message" : "Team not found"}, status.HTTP_404_NOT_FOUND)
         team.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
